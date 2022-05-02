@@ -9,27 +9,27 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
     using SafeMath for uint256;
 
     // freeze accounts mapping
-    mapping(address=>bool) freezed;
+    mapping(address=>bool) frozen;
 
     constructor() ERC20("MyToken", "MTK") {}
 
     function freeze(address[] calldata addrs) external onlyOwner{
         for (uint256 i = 0; i < addrs.length; ++ i) {
-            freezed[addrs[i]] = true;
+            frozen[addrs[i]] = true;
         }
     }
 
     function unFreeze(address[] calldata addrs) external onlyOwner {
         for (uint256 i = 0; i < addrs.length; ++ i) {
-            delete freezed[addrs[i]];
+            delete frozen[addrs[i]];
         }
     }
 
 
     // modifier to give access on some actions only not freezed accounts
     modifier whenNotFrozen(address from, address to) {
-        require(freezed[from]==false);
-        require(freezed[to]==false);
+        require(frozen[from]==false);
+        require(frozen[to]==false);
         _;
     }
 
