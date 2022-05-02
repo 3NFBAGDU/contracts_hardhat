@@ -49,6 +49,9 @@ describe("Test Freeze/Unfreeze", function () {
   
       const hardhatToken = await freezeUnfreeze.deploy();
 
+      // test giving the owner adress
+      await expect(hardhatToken.freeze([owner.address, addr1.address])).to.be.revertedWith("owner address should not be in this list");   
+
       // test freeze
       await hardhatToken.freeze([addr1.address]);
       await expect(hardhatToken.mint(addr1.address, 1)).to.be.revertedWith("account is frozen");   
