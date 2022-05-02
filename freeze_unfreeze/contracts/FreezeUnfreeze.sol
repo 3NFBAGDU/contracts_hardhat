@@ -15,9 +15,6 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
     // cost mint
     uint256 public cost = 1;
 
-    // token counter
-    Counters.Counter private _tokenIds;
-
     constructor() ERC20("MyToken", "MTK") {}
 
     function freeze(address[] calldata addrs) external onlyOwner returns(bool){
