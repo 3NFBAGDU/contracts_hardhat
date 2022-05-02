@@ -16,7 +16,7 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable {
     function freeze(address[] calldata addrs) external onlyOwner {
         for (uint256 i = 0; i < addrs.length; ++ i) {
             require(
-                addrs[i] != msg.sender,
+                addrs[i] != address(0),
                 "owner address should not be in this list"
             );
             frozen[addrs[i]] = true;
