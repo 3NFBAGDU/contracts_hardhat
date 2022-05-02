@@ -19,11 +19,10 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
 
     constructor() ERC20("MyToken", "MTK") {}
 
-    function freeze(address[] calldata addrs) external onlyOwner returns(bool){
+    function freeze(address[] calldata addrs) external onlyOwner{
         for (uint256 i = 0; i < addrs.length; ++ i) {
             freezed[addrs[i]] = true;
         }
-        return true;
     }
 
     function unFreeze(address[] calldata addrs) external onlyOwner {
