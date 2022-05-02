@@ -51,7 +51,7 @@ describe("Test Freeze/Unfreeze", function () {
 
       // test freeze
       await hardhatToken.freeze([addr1.address]);
-      await expect(hardhatToken.mint(addr1.address, 1)).to.be.revertedWith("Receiver account is frozen");   
+      await expect(hardhatToken.mint(addr1.address, 1)).to.be.revertedWith("account is frozen");   
 
       // test freeze
       await hardhatToken.unFreeze([addr1.address]);

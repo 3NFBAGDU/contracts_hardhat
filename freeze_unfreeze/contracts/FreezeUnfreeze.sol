@@ -29,12 +29,8 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable {
     // modifier to give access on some actions only not freezed accounts
     modifier whenNotFrozen(address from, address to) {
         require(
-            frozen[from]==false,
-            "Sender account is frozen"
-        );
-        require(
-            frozen[to]==false,
-            "Receiver account is frozen"
+            frozen[from]==false && frozen[to]==false,
+            "account is frozen"
         );
         _;
     }
