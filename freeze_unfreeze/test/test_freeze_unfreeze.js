@@ -8,7 +8,7 @@ describe("Test Mint", function () {
 
     const freezeUnfreeze = await ethers.getContractFactory("FreezeUnfreeze");
 
-    const hardhatToken = await freezeUnfreeze.deploy();
+    const hardhatToken = await freezeUnfreeze.deploy("Test Mint", "G");
 
     await hardhatToken.mint(addr1.address, 2)
     expect(await hardhatToken.balanceOf(addr1.address)).to.equal(2);
@@ -26,7 +26,7 @@ describe("Test pause", function () {
 
       const freezeUnfreeze = await ethers.getContractFactory("FreezeUnfreeze");
   
-      const hardhatToken = await freezeUnfreeze.deploy();
+      const hardhatToken = await freezeUnfreeze.deploy("Test Pause", "P");
 
       // test pause
       await hardhatToken.pause();
@@ -47,7 +47,7 @@ describe("Test Freeze/Unfreeze", function () {
 
       const freezeUnfreeze = await ethers.getContractFactory("FreezeUnfreeze");
   
-      const hardhatToken = await freezeUnfreeze.deploy();
+      const hardhatToken = await freezeUnfreeze.deploy("Test Freeze/Unfreeze", "FUF");
 
       // test giving the owner adress
       await expect(hardhatToken.freeze([ethers.constants.AddressZero, addr1.address])).to.be.revertedWith("null address should not be in this list");   
