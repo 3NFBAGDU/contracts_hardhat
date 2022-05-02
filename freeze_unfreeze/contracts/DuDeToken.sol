@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-contract FreezeUnfreeze is ERC20, Ownable, Pausable {
+contract DuDeToken is ERC20, Ownable, Pausable {
     using SafeMath for uint256;
 
     // freeze accounts mapping

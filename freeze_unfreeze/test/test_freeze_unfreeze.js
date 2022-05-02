@@ -6,7 +6,7 @@ describe("Test Mint", function () {
   it("Test Mint", async function () {
     const [owner, addr1] = await ethers.getSigners();
 
-    const freezeUnfreeze = await ethers.getContractFactory("FreezeUnfreeze");
+    const freezeUnfreeze = await ethers.getContractFactory("DuDeToken");
 
     const hardhatToken = await freezeUnfreeze.deploy("Test Mint", "G");
 
@@ -24,7 +24,7 @@ describe("Test pause", function () {
   it("Test Pause", async function () {
       const [owner, addr1] = await ethers.getSigners();
 
-      const freezeUnfreeze = await ethers.getContractFactory("FreezeUnfreeze");
+      const freezeUnfreeze = await ethers.getContractFactory("DuDeToken");
   
       const hardhatToken = await freezeUnfreeze.deploy("Test Pause", "P");
 
@@ -45,7 +45,7 @@ describe("Test Freeze/Unfreeze", function () {
   it("Test Freeze/Unfreeze", async function () {
       const [owner, addr1, addr2] = await ethers.getSigners();
 
-      const freezeUnfreeze = await ethers.getContractFactory("FreezeUnfreeze");
+      const freezeUnfreeze = await ethers.getContractFactory("DuDeToken");
   
       const hardhatToken = await freezeUnfreeze.deploy("Test Freeze/Unfreeze", "FUF");
 
