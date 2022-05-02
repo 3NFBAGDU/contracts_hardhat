@@ -62,6 +62,7 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
     function _beforeTokenTransfer(address from, address to, uint256 amount)
         internal
         whenNotPaused
+        whenNotFreezed
         override
     {
         super._beforeTokenTransfer(from, to, amount);
