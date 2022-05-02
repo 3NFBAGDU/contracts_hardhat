@@ -30,7 +30,7 @@ describe("Test pause", function () {
 
       // test pause
       await hardhatToken.pause();
-      await expect(hardhatToken.mint(addr1.address, 2)).to.be.reverted;        
+      await expect(hardhatToken.mint(addr1.address, 2)).to.be.revertedWith("Pausable: paused");        
 
       // test unpause 
       await hardhatToken.unpause();
@@ -51,7 +51,7 @@ describe("Test Freeze/Unfreeze", function () {
 
       // test freeze
       await hardhatToken.freeze([addr1.address]);
-      await expect(hardhatToken.mint(addr1.address, 1)).to.be.reverted;        
+      await expect(hardhatToken.mint(addr1.address, 1)).to.be.revertedWith("Receiver account is frozen");   
 
       // test freeze
       await hardhatToken.unFreeze([addr1.address]);
