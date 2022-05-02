@@ -10,20 +10,12 @@ describe("Test Mint", function () {
 
     const hardhatToken = await freezeUnfreeze.deploy();
 
-    await hardhatToken.connect(addr1).mint(2, {
-      value: 2
-    })
+    await hardhatToken.mint(addr1.address, 2)
     expect(await hardhatToken.balanceOf(addr1.address)).to.equal(2);
 
 
-    await hardhatToken.connect(addr1).mint(1, {
-      value: 1
-    })
+    await hardhatToken.mint(addr1.address, 1)
     expect(await hardhatToken.balanceOf(addr1.address)).to.equal(3);
-
-    await expect(hardhatToken.connect(addr1).mint(3, {
-      value: 1
-    })).to.be.reverted;        
 
   });
 })
@@ -38,16 +30,13 @@ describe("Test pause", function () {
 
       // test pause
       await hardhatToken.pause();
-      await expect(hardhatToken.connect(addr1).mint(1, {
-        value: 1
-      })).to.be.reverted;        
+      await expect(hardhatToken.mint(addr1.address, 2)).to.be.reverted;        
 
       // test unpause 
       await hardhatToken.unpause();
-      await hardhatToken.connect(addr1).mint(1, {
-        value: 1
-      })
-      expect(await hardhatToken.balanceOf(addr1.address)).to.equal(1);
+      await hardhatToken.mint(addr1.address, 2)
+
+      expect(await hardhatToken.balanceOf(addr1.address)).to.equal(2);
   });
 });
 
@@ -62,15 +51,11 @@ describe("Test Freeze/Unfreeze", function () {
 
       // test freeze
       await hardhatToken.freeze([addr1.address]);
-      await expect(hardhatToken.connect(addr1).mint(1, {
-        value: 1
-      })).to.be.reverted;        
+      await expect(hardhatToken.mint(addr1.address, 1)).to.be.reverted;        
 
       // test freeze
       await hardhatToken.unFreeze([addr1.address]);
-      await hardhatToken.connect(addr1).mint(1, {
-        value: 1
-      })
+      await hardhatToken.mint(addr1.address, 1)    
       expect(await hardhatToken.balanceOf(addr1.address)).to.equal(1);
   });
 });

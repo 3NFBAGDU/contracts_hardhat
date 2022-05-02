@@ -11,12 +11,6 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
     // freeze accounts mapping
     mapping(address=>bool) freezed;
 
-    // store token count
-    mapping(address=>uint256) ownerAmount;
-
-    // cost mint
-    uint256 public cost = 1;
-
     constructor() ERC20("MyToken", "MTK") {}
 
     function freeze(address[] calldata addrs) external onlyOwner{
@@ -33,20 +27,19 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
 
 
     // modifier to give access on some actions only not freezed accounts
-    modifier whenNotFreezed() {
-        require(freezed[msg.sender]==false);
+    modifier whenNotFrozen(address from, address to) {
+        require(freezed[from]==false);
+        require(freezed[to]==false);
         _;
     }
 
 
-    function mint(uint256 count) external payable whenNotPaused whenNotFreezed {
-        require(
-            msg.value >= cost.mul(count), 
-            "Not enough ether to purchase NFTs."
-        );
-
-        _mint(msg.sender, count);
-        ownerAmount[msg.sender] += 1;
+    function mint(address addr, uint256 count) 
+        external 
+        whenNotPaused
+        onlyOwner
+    {
+        _mint(addr, count);
     }
 
     function pause() public onlyOwner {
@@ -59,8 +52,8 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)
         internal
+        whenNotFrozen(from, to)
         whenNotPaused
-        whenNotFreezed
         override
     {
         super._beforeTokenTransfer(from, to, amount);
