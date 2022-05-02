@@ -21,7 +21,7 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable {
 
     function unFreeze(address[] calldata addrs) external onlyOwner {
         for (uint256 i = 0; i < addrs.length; ++ i) {
-            delete frozen[addrs[i]];
+            frozen[addrs[i]] = false;
         }
     }
 
