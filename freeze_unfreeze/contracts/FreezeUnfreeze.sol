@@ -7,14 +7,8 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract FreezeUnfreeze is ERC20, Ownable, Pausable{
 
-    using Counters for Counters.Counter;
-
     // freeze accounts mapping
     mapping(address=>bool) freezed;
-
-    // mapping token and its owner
-    mapping(uint256=>address) tokenOwner;
-
 
     // cost mint
     uint256 public cost = 1;
@@ -51,9 +45,7 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
             "Not enough ether to purchase NFTs."
         );
 
-        uint256 newTokenID = _tokenIds.current();
         _mint(msg.sender, 1);
-        tokenOwner[newTokenID] = msg.sender;
     }
 
     function pause() public onlyOwner {
