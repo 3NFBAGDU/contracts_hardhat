@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-contract FreezeUnfreeze is ERC20, Ownable, Pausable{
+contract FreezeUnfreeze is ERC20, Ownable, Pausable {
     using SafeMath for uint256;
 
     // freeze accounts mapping
@@ -13,7 +13,7 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
 
     constructor() ERC20("MyToken", "MTK") {}
 
-    function freeze(address[] calldata addrs) external onlyOwner{
+    function freeze(address[] calldata addrs) external onlyOwner {
         for (uint256 i = 0; i < addrs.length; ++ i) {
             frozen[addrs[i]] = true;
         }
