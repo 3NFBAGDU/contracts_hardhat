@@ -17,7 +17,7 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable {
         for (uint256 i = 0; i < addrs.length; ++ i) {
             require(
                 addrs[i] != address(0),
-                "owner address should not be in this list"
+                "null address should not be in this list"
             );
             frozen[addrs[i]] = true;
         }
