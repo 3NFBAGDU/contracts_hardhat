@@ -13,7 +13,7 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
     mapping(address=>bool) freezed;
 
     // store token count
-    mapping(address=>uint256) ownerCount;
+    mapping(address=>uint256) ownerAmount;
 
     // cost mint
     uint256 public cost = 1;
@@ -48,7 +48,7 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
         );
 
         _mint(msg.sender, count);
-        ownerCount[msg.sender] += 1;
+        ownerAmount[msg.sender] += 1;
     }
 
     function pause() public onlyOwner {
