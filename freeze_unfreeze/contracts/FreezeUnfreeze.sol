@@ -39,13 +39,13 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
     }
 
 
-    function mint() external payable whenNotPaused whenNotFreezed {
+    function mint(uint256 count) external payable whenNotPaused whenNotFreezed {
         require(
             msg.value >= cost, 
             "Not enough ether to purchase NFTs."
         );
 
-        _mint(msg.sender, 1);
+        _mint(msg.sender, count);
     }
 
     function pause() public onlyOwner {
