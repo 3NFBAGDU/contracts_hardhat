@@ -11,7 +11,7 @@ describe("Test Mint", function () {
     const hardhatToken = await freezeUnfreeze.deploy();
 
     await hardhatToken.connect(addr1).mint(2, {
-      value: 1
+      value: 2
     })
     expect(await hardhatToken.balanceOf(addr1.address)).to.equal(2);
 
@@ -20,6 +20,10 @@ describe("Test Mint", function () {
       value: 1
     })
     expect(await hardhatToken.balanceOf(addr1.address)).to.equal(3);
+
+    await expect(hardhatToken.connect(addr1).mint(3, {
+      value: 1
+    })).to.be.reverted;        
 
   });
 })

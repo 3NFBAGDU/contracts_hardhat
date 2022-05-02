@@ -4,8 +4,10 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract FreezeUnfreeze is ERC20, Ownable, Pausable{
+    using SafeMath for uint256;
 
     // freeze accounts mapping
     mapping(address=>bool) freezed;
@@ -41,7 +43,7 @@ contract FreezeUnfreeze is ERC20, Ownable, Pausable{
 
     function mint(uint256 count) external payable whenNotPaused whenNotFreezed {
         require(
-            msg.value >= cost, 
+            msg.value >= cost.mul(count), 
             "Not enough ether to purchase NFTs."
         );
 
